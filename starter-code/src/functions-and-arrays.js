@@ -61,6 +61,14 @@ const wordsArr = [
   'palace'
 ];
 
+function averageWordLength(array) {
+  if (array.length === 0) {
+    return null;
+  }
+  const avg = array.join('').length / array.length;
+  return avg;
+}
+
 // Iteration #5: Unique arrays
 const wordsUnique = [
   'crab',
@@ -75,6 +83,16 @@ const wordsUnique = [
   'simple',
   'bring'
 ];
+// MANY DOUBTS DOING THIS ONE
+function uniquifyArray(arrayOfWords) {
+  const arrayUniqueWords = [];
+  for (let word of arrayOfWords) {
+    if (arrayUniqueWords.indexOf(word) < 0) {
+      arrayUniqueWords.push(word);
+    }
+  }
+  return arrayUniqueWords;
+}
 
 // Iteration #6: Find elements
 const wordsFind = [
@@ -88,6 +106,26 @@ const wordsFind = [
   'disobedience'
 ];
 
+/*
+function doesWordExist(arrayOfWords, word) {
+  for (let occurrence of arrayOfWords) {
+    if (occurrence === word) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+ISN'T THIS THE SAME??
+*/
+
+function doesWordExist(arrayOfWords, word) {
+  for (let occurence of arrayOfWords) {
+    if (occurence === word) return true;
+  }
+  return false;
+}
 // Iteration #7: Count repetition
 const wordsCount = [
   'machine',
@@ -103,6 +141,13 @@ const wordsCount = [
   'matter'
 ];
 
+function howManyTimes(arrayOfWords, word) {
+  let count = 0;
+  for (let occurrence of arrayOfWords) {
+    if (occurrence === word) count++;
+  }
+  return count;
+}
 // Iteration #8: Bonus
 
 const matrix = [
@@ -127,3 +172,28 @@ const matrix = [
   [20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54],
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
+
+function greatestProduct(matrix) {
+  let greatest;
+  // HORIZONTAL
+  for (let r = 0; r < matrix.length; r++) {
+    for (let i = 0; i < matrix[r].length - 4 + 1; i++) {
+      const product = matrix[r][i] * matrix[r][i + 1] * matrix[r][i + 2] * matrix[r][i + 3];
+      if (typeof greatest === 'undefined' || product > greatest) {
+        greatest = product;
+      }
+    }
+  }
+
+  // VERTICAL
+  for (let c = 0; c < matrix[0].length; c++) {
+    for (let i = 0; i < matrix.length - 4 + 1; i++) {
+      const product = matrix[i][c] * matrix[i + 1][c] * matrix[i + 2][c] * matrix[i + 3][c];
+      if (typeof greatest === 'undefined' || product > greatest) {
+        greatest = product;
+      }
+    }
+  }
+
+  return greatest;
+}
